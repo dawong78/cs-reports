@@ -34,9 +34,11 @@ cs.OfflineSubmissions.StratusFormsSaveFormOffline = function (listName, formID,
     }
 };
 
-$(function () {
-    // Override the save function if offline.
-    // Override on document ready to allow html page to set the offline flag.
+/**
+ * Override the save function if offline.
+ * @returns {undefined}
+ */
+cs.OfflineSubmissions.configureOffline = function() {
     $.fn.StratusFormsSaveForm = (function () {
         var original = $.fn.StratusFormsSaveForm;
         
@@ -48,6 +50,10 @@ $(function () {
             return original;
         }
     })();
+};
 
+$(function() {
+    // Override on document ready to allow html page to set the offline flag.
+    cs.OfflineSubmissions.configureOffline();
 });
 

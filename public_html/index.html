@@ -32,8 +32,11 @@
         $("#SFForm").StratusFormsSubmit({
             listName: "MyList",
             completefunc: function (id) {
-                alert("Save was successful. ID = " + id);
-                window.location = window.location.pathname + "?formID=" + id;
+                // Don't reload when offline.
+                if (!cs.OfflineSubmissions.offline) {
+                    alert("Save was successful. ID = " + id);
+                    window.location = window.location.pathname + "?formID=" + id;
+                }
             }
         });
     }
@@ -533,5 +536,3 @@
 
     <input type='button' value='Submit/Update Form' onclick='SubmitForm();'>
 </div>
-
-<a href='data:text/plain;charset=utf-8,hi' download='test.txt'>click me</a>

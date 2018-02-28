@@ -37,7 +37,7 @@ cs.OfflineSubmissions.StratusFormsSaveFormOffline = function (listName, formID,
 cs.OfflineSubmissions.configure = function () {
     return $.get("/")
             .done(function () {
-                cs.OfflineSubmissions.offline = true;
+                cs.OfflineSubmissions.offline = false;
                 cs.OfflineSubmissions.configureOffline();
             })
             .fail(function () {

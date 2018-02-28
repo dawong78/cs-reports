@@ -34,6 +34,18 @@ cs.OfflineSubmissions.StratusFormsSaveFormOffline = function (listName, formID,
     }
 };
 
+cs.OfflineSubmissions.configure = function () {
+    return $.get("/")
+            .done(function () {
+                cs.OfflineSubmissions.offline = true;
+                cs.OfflineSubmissions.configureOffline();
+            })
+            .fail(function () {
+                cs.OfflineSubmissions.offline = true;
+                cs.OfflineSubmissions.configureOffline();
+            });
+};
+
 /**
  * Override the save function if offline.
  * @returns {undefined}
@@ -50,10 +62,35 @@ cs.OfflineSubmissions.configureOffline = function () {
             return original;
         }
     })();
+
 };
 
+cs.OfflineSubmissions.selectFile = function() {
+    var readFiles = function (evt) {
+        var files = evt.target.files; // FileList object
+        var f = files[0];
+        var reader = new FileReader();
+        reader.onload = (function (event) {
+            setContents(event.target.result);
+        });
+        // Read in the image file as a data URL.
+        reader.readAsText(f);
+    };
+    
+    var setContents = function(data) {
+        $('#offlineSubmissions-content').html(data);
+    };
 
-cs.OfflineSubmissions.submitForm = function() {
+    var $fileInput = $('<input>');
+    $fileInput.attr('type', 'file')
+    $fileInput.val('content.html')
+    $fileInput.click(readFiles);
+    $fileInput[0].click();
+
+}
+
+
+cs.OfflineSubmissions.submitForm = function () {
     //When the form is submitted store it to the specified list
     //also pasas in the x and y offset of error messages for elements
     //this allows you to change their location in reference to the form field
@@ -80,6 +117,6 @@ $(function () {
     });
 
     // Override on document ready to allow html page to set the offline flag.
-    cs.OfflineSubmissions.configureOffline();
+    cs.OfflineSubmissions.configure();
 });
 

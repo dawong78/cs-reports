@@ -17,13 +17,13 @@ th{
     padding-top:10px;
 }
 
-.tooltip  {
+.cs-tooltip  {
     position: relative;
     display: inline-block;
     border-bottom: 1px dotted black;
 }
 
-.tooltip .tooltiptext {
+.cs-tooltip .cs-tooltiptext {
     visibility: hidden;
     width: 600px;
     background-color: black;
@@ -38,7 +38,7 @@ th{
     margin-left: -60px;
 }
 
-.tooltip .tooltiptext::after {
+.cs-tooltip .cs-tooltiptext::after {
     content: "";
     position: absolute;
     bottom: 100%;
@@ -49,6 +49,6 @@ th{
     border-color: transparent transparent black transparent;
 }
 
-.tooltip:hover .tooltiptext {
+.cs-tooltip:hover .cs-tooltiptext {
     visibility: visible;
 }

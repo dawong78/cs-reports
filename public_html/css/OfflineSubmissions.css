@@ -32,7 +32,7 @@ th{
     border-radius: 6px;
     padding: 5px 0;
     position: absolute;
-    z-index: 1;
+    z-index: 99;
     top: 150%;
     left: 50%;
     margin-left: -60px;
@@ -51,4 +51,8 @@ th{
 
 .cs-tooltip:hover .cs-tooltiptext {
     visibility: visible;
+}
+
+.cs-left-justify {
+    text-align: left !important;
 }
